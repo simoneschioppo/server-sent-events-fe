@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, scan, tap } from 'rxjs';
 import { AppService } from './app.service';
 
 @Component({
@@ -8,9 +9,19 @@ import { AppService } from './app.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private appService: AppService){}
+  constructor(private appService: AppService) { }
+
+  $res!: Observable<Array<number>>;
 
   ngOnInit(): void {
-    this.appService.getHello(); 
+    this.$res = this.appService.getServerEvents().pipe(
+      scan((acc, value) => {
+        acc.push(+value)
+        return acc
+      }, ([] as Array<number>))
+
+      // Logging scan res: 
+      // tap(res => console.log(res))
+    )
   }
 }

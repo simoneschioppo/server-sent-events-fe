@@ -1,0 +1,14 @@
+.roulette {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    gap: 20px; 
+    
+    div { 
+        border: 1px solid red;
+        padding: 10px;
+        min-width: 20vw;
+        text-align: center;
+    }
+}
